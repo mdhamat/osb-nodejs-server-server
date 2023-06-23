@@ -133,9 +133,12 @@ module.exports.serviceInstanceProvisionUsingPUT =
       xBrokerAPIOriginatingIdentity
     )
       .then(async (response) => {
+        console.log("in step1");
         const current_epoch = Date.now();
-
+  
         await client.connect();
+        console.log("DB connected");
+        
         var dbo = client.db("mydb");
         var myobj = {
           account_id: body.context.account_id,
@@ -156,7 +159,7 @@ module.exports.serviceInstanceProvisionUsingPUT =
         } catch (e) {
           console.log("Error : ", e);
         }
-
+        console.log("in final step");
         return res.status(201).json({
           dashboard_url:
             "https://qradar-bnpp-dashboard-bckt.s3-web.us-south.cloud-object-storage.appdomain.cloud",
