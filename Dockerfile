@@ -4,6 +4,7 @@ FROM node:14
 WORKDIR /app
 
 COPY package*.json ./
+COPY 33d558dc-d56b-11e9-8bb3-6643e1ee2390 ./
 
 RUN npm install
 RUN npm install oas3-tools
