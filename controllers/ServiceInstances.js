@@ -1,7 +1,6 @@
 "use strict";
 
 var utils = require("../utils/writer.js");
-const path = require("path");
 var ServiceInstances = require("../service/ServiceInstancesService");
 var MongoClient = require("mongodb").MongoClient;
 
