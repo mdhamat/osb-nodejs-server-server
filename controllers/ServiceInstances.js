@@ -8,7 +8,7 @@ const url = process.env.BNPP_MONGO_CS;
 
 const client = new MongoClient(url, {
   ssl: true,
-  tlsCAFile: process.env.BNPP_CA,
+  tlsCAFile: '/app/bnpp-ca',
 });
 
 module.exports.serviceInstanceDeprovisionUsingDELETE =
