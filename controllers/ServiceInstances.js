@@ -133,7 +133,7 @@ module.exports.serviceInstanceProvisionUsingPUT =
       xBrokerAPIOriginatingIdentity
     )
       .then(async (response) => {
-        console.log("in step1");
+        
         const current_epoch = Date.now();
   
         await client.connect();
@@ -145,14 +145,15 @@ module.exports.serviceInstanceProvisionUsingPUT =
           instance_id: instance_id,
           service_id: body.service_id,
           plan_id: body.plan_id,
-          ip_address: body.params.ipAddress,
-          email: body.params.email,
+          //ip_address: body.params.ipAddress,
+          //email: body.params.email,
           instance_name: body.context.name,
           created_at: current_epoch,
           metered: 0,
           activated: true,
           permenentClosed: false,
         };
+        console.log("Object : ",myobj);
         try {
           await dbo.collection("users").insertOne(myobj);
           console.log("Data stored");
