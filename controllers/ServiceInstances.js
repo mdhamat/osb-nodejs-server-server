@@ -2,13 +2,15 @@
 
 var utils = require("../utils/writer.js");
 var ServiceInstances = require("../service/ServiceInstancesService");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 var MongoClient = require("mongodb").MongoClient;
 
 const url = process.env.BNPP_MONGO_CS;
 
 const client = new MongoClient(url, {
   ssl: true,
-  tlsCAFile: '/app/87ca6778-6d9d-11e9-b6bc-be2dba81101c',
+  tlsCAFile: "/app/87ca6778-6d9d-11e9-b6bc-be2dba81101c",
 });
 
 module.exports.serviceInstanceDeprovisionUsingDELETE =
@@ -51,6 +53,22 @@ module.exports.serviceInstanceDeprovisionUsingDELETE =
         } catch (err) {
           console.log("Error while updating databse : ", err);
         }
+
+        //send mail
+        const msg = {
+          to: process.env.MAIL_TO,
+          from: process.env.MAIL_FROM,
+          subject: "Deprovision Request",
+          html: `<b>Plan ID :</b> ${plan_id}<br><b>Service ID :</b> ${service_id}<br><b>Instance ID :</b> ${instance_id}`,
+        };
+        await sgMail
+          .send(msg)
+          .then(() => {
+            console.log("Email sent");
+          })
+          .catch((error) => {
+            console.error("Error while sending email : ", error);
+          });
 
         return res.status(200).json({});
         utils.writeJson(res, response);
@@ -133,12 +151,10 @@ module.exports.serviceInstanceProvisionUsingPUT =
       xBrokerAPIOriginatingIdentity
     )
       .then(async (response) => {
-        
         const current_epoch = Date.now();
-  
+
         await client.connect();
-        console.log("DB connected");
-        
+
         var dbo = client.db("mydb");
         var myobj = {
           account_id: body.context.account_id,
@@ -147,24 +163,48 @@ module.exports.serviceInstanceProvisionUsingPUT =
           plan_id: body.plan_id,
           ip_address: body.parameters.ipAddress,
           email: body.parameters.email,
+          name: body.parameters.name,
           instance_name: body.context.name,
           created_at: current_epoch,
           metered: 0,
           activated: true,
           permenentClosed: false,
         };
-        console.log("Object : ",myobj);
+        console.log("Object : ", myobj);
         try {
           await dbo.collection("users").insertOne(myobj);
           console.log("Data stored");
         } catch (e) {
-          console.log("Error : ", e);
+          console.log("Error while storing data : ", e);
         }
-        console.log("in final step");
+
+        // send mail
+        const msg = {
+          to: process.env.MAIL_TO,
+          from: process.env.MAIL_FROM,
+          subject: "Provision Request",
+          html: `<b>Plan ID :</b> ${myobj.plan_id}<br>
+                  <b>Service ID :</b> ${myobj.service_id}<br>
+                  <b>Instance ID :</b> ${myobj.instance_id}<br>
+                  <b>Account ID :</b> ${myobj.account_id}<br>
+                  <b>Instance Name :</b> ${body.context.name}<br>
+                  <b>Emails :</b> ${myobj.email}<br>
+                  <b>IPs :</b> ${myobj.ip_address}<br>
+                  <b>Names :</b> ${myobj.name}<br>`,
+        };
+        await sgMail
+          .send(msg)
+          .then(() => {
+            console.log("Email sent");
+          })
+          .catch((error) => {
+            console.error("Error while sending mail : ", error);
+          });
+
         return res.status(201).json({
-          dashboard_url:
-            "https://qradar-bnpp-dashboard-bckt.s3-web.us-south.cloud-object-storage.appdomain.cloud",
+          dashboard_url: process.env.DASHBOARD_URL,
         });
+
         utils.writeJson(res, response);
       })
       .catch(function (response) {
