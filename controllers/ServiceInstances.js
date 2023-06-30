@@ -161,7 +161,7 @@ module.exports.serviceInstanceProvisionUsingPUT =
           instance_id: instance_id,
           service_id: body.service_id,
           plan_id: body.plan_id,
-          ip_address: body.parameters.ipAddress,
+          ip_address: body.parameters.ipAddress || "",
           email: body.parameters.email,
           name: body.parameters.name,
           instance_name: body.context.name,
