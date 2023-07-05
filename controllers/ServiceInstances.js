@@ -230,7 +230,40 @@ module.exports.serviceInstanceUpdateUsingPATCH =
       xBrokerAPIVersion,
       xBrokerAPIOriginatingIdentity
     )
-      .then(function (response) {
+      .then(async (response) => {
+        await client.connect();
+        const dbo = client.db("mydb");
+
+        var updated_fields = {
+          plan_id: body.plan_id,
+        };
+        const filter = { instance_id: instance_id };
+        const updateOperation = {
+          $set: updated_fields,
+        };
+
+        try {
+          await dbo.collection("users").updateOne(filter, updateOperation);
+        } catch (err) {
+          console.log("Error while updating databse : ", err);
+        }
+
+        //send mail
+        const msg = {
+          to: process.env.MAIL_TO,
+          from: process.env.MAIL_FROM,
+          subject: "Update Instance Plan Request",
+          html: `<b>New Plan ID :</b> ${body.plan_id}<br><b>Service ID :</b> ${service_id}<br><b>Instance ID :</b> ${instance_id}`,
+        };
+        await sgMail
+          .send(msg)
+          .then(() => {
+            console.log("Email sent");
+          })
+          .catch((error) => {
+            console.error("Error while sending email : ", error);
+          });
+        return res.status(200).json({});
         utils.writeJson(res, response);
       })
       .catch(function (response) {
