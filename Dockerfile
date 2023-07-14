@@ -10,7 +10,7 @@ RUN npm install
 RUN npm install oas3-tools
 RUN npm install cors
 RUN npm install mongodb
-RUN npm install @sendgrid/mail
+# RUN npm install @sendgrid/mail
 
 
 # Bundle app source

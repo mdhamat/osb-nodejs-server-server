@@ -2,8 +2,8 @@
 
 var utils = require("../utils/writer.js");
 var ServiceInstances = require("../service/ServiceInstancesService");
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// const sgMail = require("@sendgrid/mail");
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 var MongoClient = require("mongodb").MongoClient;
 
 const url = process.env.BNPP_MONGO_CS;
@@ -55,20 +55,20 @@ module.exports.serviceInstanceDeprovisionUsingDELETE =
         }
 
         //send mail
-        const msg = {
-          to: process.env.MAIL_TO,
-          from: process.env.MAIL_FROM,
-          subject: "Deprovision Request",
-          html: `<b>Plan ID :</b> ${plan_id}<br><b>Service ID :</b> ${service_id}<br><b>Instance ID :</b> ${instance_id}`,
-        };
-        await sgMail
-          .send(msg)
-          .then(() => {
-            console.log("Email sent");
-          })
-          .catch((error) => {
-            console.error("Error while sending email : ", error);
-          });
+        // const msg = {
+        //   to: process.env.MAIL_TO,
+        //   from: process.env.MAIL_FROM,
+        //   subject: "Deprovision Request",
+        //   html: `<b>Plan ID :</b> ${plan_id}<br><b>Service ID :</b> ${service_id}<br><b>Instance ID :</b> ${instance_id}`,
+        // };
+        // await sgMail
+        //   .send(msg)
+        //   .then(() => {
+        //     console.log("Email sent");
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error while sending email : ", error);
+        //   });
 
         return res.status(200).json({});
         utils.writeJson(res, response);
@@ -161,9 +161,9 @@ module.exports.serviceInstanceProvisionUsingPUT =
           instance_id: instance_id,
           service_id: body.service_id,
           plan_id: body.plan_id,
-          ip_address: body.parameters.ipAddress || "",
-          email: body.parameters.email,
-          name: body.parameters.name,
+          // ip_address: body.parameters.ipAddress || "",
+          // email: body.parameters.email,
+          // name: body.parameters.name,
           instance_name: body.context.name,
           created_at: current_epoch,
           metered: 0,
@@ -179,27 +179,27 @@ module.exports.serviceInstanceProvisionUsingPUT =
         }
 
         // send mail
-        const msg = {
-          to: process.env.MAIL_TO,
-          from: process.env.MAIL_FROM,
-          subject: "Provision Request",
-          html: `<b>Plan ID :</b> ${myobj.plan_id}<br>
-                  <b>Service ID :</b> ${myobj.service_id}<br>
-                  <b>Instance ID :</b> ${myobj.instance_id}<br>
-                  <b>Account ID :</b> ${myobj.account_id}<br>
-                  <b>Instance Name :</b> ${body.context.name}<br>
-                  <b>Emails :</b> ${myobj.email}<br>
-                  <b>IPs :</b> ${myobj.ip_address}<br>
-                  <b>Names :</b> ${myobj.name}<br>`,
-        };
-        await sgMail
-          .send(msg)
-          .then(() => {
-            console.log("Email sent");
-          })
-          .catch((error) => {
-            console.error("Error while sending mail : ", error);
-          });
+        // const msg = {
+        //   to: process.env.MAIL_TO,
+        //   from: process.env.MAIL_FROM,
+        //   subject: "Provision Request",
+        //   html: `<b>Plan ID :</b> ${myobj.plan_id}<br>
+        //           <b>Service ID :</b> ${myobj.service_id}<br>
+        //           <b>Instance ID :</b> ${myobj.instance_id}<br>
+        //           <b>Account ID :</b> ${myobj.account_id}<br>
+        //           <b>Instance Name :</b> ${body.context.name}<br>
+        //           <b>Emails :</b> ${myobj.email}<br>
+        //           <b>IPs :</b> ${myobj.ip_address}<br>
+        //           <b>Names :</b> ${myobj.name}<br>`,
+        // };
+        // await sgMail
+        //   .send(msg)
+        //   .then(() => {
+        //     console.log("Email sent");
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error while sending mail : ", error);
+        //   });
 
         return res.status(201).json({
           dashboard_url: process.env.DASHBOARD_URL,
@@ -249,20 +249,20 @@ module.exports.serviceInstanceUpdateUsingPATCH =
         }
 
         //send mail
-        const msg = {
-          to: process.env.MAIL_TO,
-          from: process.env.MAIL_FROM,
-          subject: "Update Instance Plan Request",
-          html: `<b>New Plan ID :</b> ${body.plan_id}<br><b>Service ID :</b> ${service_id}<br><b>Instance ID :</b> ${instance_id}`,
-        };
-        await sgMail
-          .send(msg)
-          .then(() => {
-            console.log("Email sent");
-          })
-          .catch((error) => {
-            console.error("Error while sending email : ", error);
-          });
+        // const msg = {
+        //   to: process.env.MAIL_TO,
+        //   from: process.env.MAIL_FROM,
+        //   subject: "Update Instance Plan Request",
+        //   html: `<b>New Plan ID :</b> ${body.plan_id}<br><b>Service ID :</b> ${service_id}<br><b>Instance ID :</b> ${instance_id}`,
+        // };
+        // await sgMail
+        //   .send(msg)
+        //   .then(() => {
+        //     console.log("Email sent");
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error while sending email : ", error);
+        //   });
         return res.status(200).json({});
         utils.writeJson(res, response);
       })
