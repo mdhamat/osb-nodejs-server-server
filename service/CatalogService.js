@@ -49,7 +49,7 @@ exports.catalogGetUsingGET = function (xBrokerAPIVersion) {
                 description: "description",
                 version: "version",
               },
-              plan_updateable: false,
+              plan_updateable: true,
               schemas: {
                 service_binding: {
                   create: {
@@ -84,7 +84,7 @@ exports.catalogGetUsingGET = function (xBrokerAPIVersion) {
         {
           bindable: false,
           metadata: {},
-          plan_updateable: false,
+          plan_updateable: true,
           plans: [
             {
               bindable: false,
@@ -93,7 +93,7 @@ exports.catalogGetUsingGET = function (xBrokerAPIVersion) {
                 description: "description",
                 version: "version",
               },
-              plan_updateable: false,
+              plan_updateable: true,
               schemas: {
                 service_binding: {
                   create: {
@@ -119,7 +119,7 @@ exports.catalogGetUsingGET = function (xBrokerAPIVersion) {
                 description: "description",
                 version: "version",
               },
-              plan_updateable: false,
+              plan_updateable: true,
               schemas: {
                 service_binding: {
                   create: {
