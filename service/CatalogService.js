@@ -14,7 +14,7 @@ exports.catalogGetUsingGET = function (xBrokerAPIVersion) {
         {
           bindable: false,
           metadata: {},
-          plan_updateable: false,
+          plan_updateable: true,
           plans: [
             {
               bindable: false,
