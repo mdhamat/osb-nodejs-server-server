@@ -9,6 +9,7 @@
 exports.catalogGetUsingGET = function (xBrokerAPIVersion) {
   return new Promise(function (resolve, reject) {
     var examples = {};
+    console.log("Catalog is called from service");
     examples["application/json"] = {
       services: [
         {

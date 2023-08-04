@@ -11,6 +11,7 @@ module.exports.catalogGetUsingGET = function catalogGetUsingGET(
 ) {
   let authenticated = lib.authenticate(req, res, next);
   if (authenticated) {
+    console.log("Get catalog is called from controllers");
     Catalog.catalogGetUsingGET(xBrokerAPIVersion)
       .then(function (response) {
         utils.writeJson(res, response);
