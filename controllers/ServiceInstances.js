@@ -279,7 +279,7 @@ module.exports.serviceInstanceUpdateUsingPATCH =
           //     console.error("Error while sending email : ", error);
           //   });
           return res.status(200).json({});
-          utils.writeJson(res, response);
+          // utils.writeJson(res, response);
         })
         .catch(function (response) {
           utils.writeJson(res, response);
