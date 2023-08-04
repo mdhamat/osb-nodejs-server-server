@@ -237,6 +237,7 @@ module.exports.serviceInstanceUpdateUsingPATCH =
     xBrokerAPIOriginatingIdentity
   ) {
     let authenticated = lib.authenticate(req, res, next);
+    console.log("Update call");
     if (authenticated) {
       ServiceInstances.serviceInstanceUpdateUsingPATCH(
         body,
@@ -246,6 +247,7 @@ module.exports.serviceInstanceUpdateUsingPATCH =
         xBrokerAPIOriginatingIdentity
       )
         .then(async (response) => {
+          console.log("Response inside then", response);
           await client.connect();
           const dbo = client.db("mydb");
 
