@@ -344,7 +344,7 @@ paths:
         "403":
           description: Forbidden
         "422":
-          description: Unprocessable entity
+          description: Unprocessable Entity
       security:
         - basicAuth: []
       x-swagger-router-controller: ServiceInstances
