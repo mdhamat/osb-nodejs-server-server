@@ -1430,6 +1430,8 @@ components:
         parameters: {}
     ServiceInstanceUpdateRequestBody:
       title: ServiceInstanceUpdateRequestBody
+      required:
+        - service_id
       type: object
       properties:
         context:
