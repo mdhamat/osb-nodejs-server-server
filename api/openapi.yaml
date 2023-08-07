@@ -1436,8 +1436,6 @@ components:
       properties:
         context:
           $ref: "#/components/schemas/Context"
-        parameters:
-          $ref: "#/components/schemas/Object"
         plan_id:
           type: string
         previous_values:
