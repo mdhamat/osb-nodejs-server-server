@@ -1,5 +1,4 @@
-'use strict';
-
+"use strict";
 
 /**
  * deprovision a service instance
@@ -12,18 +11,24 @@
  * accepts_incomplete Boolean asynchronous deprovision supported (optional)
  * returns Object
  **/
-exports.serviceInstanceDeprovisionUsingDELETE = function(xBrokerAPIVersion,instance_id,service_id,plan_id,xBrokerAPIOriginatingIdentity,accepts_incomplete) {
-  return new Promise(function(resolve, reject) {
+exports.serviceInstanceDeprovisionUsingDELETE = function (
+  xBrokerAPIVersion,
+  instance_id,
+  service_id,
+  plan_id,
+  xBrokerAPIOriginatingIdentity,
+  accepts_incomplete
+) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
-    examples['application/json'] = { };
+    examples["application/json"] = {};
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-}
-
+};
 
 /**
  * get a service instance
@@ -35,31 +40,36 @@ exports.serviceInstanceDeprovisionUsingDELETE = function(xBrokerAPIVersion,insta
  * plan_id String id of the plan associated with the instance (optional)
  * returns ServiceInstanceResource
  **/
-exports.serviceInstanceGetUsingGET = function(xBrokerAPIVersion,instance_id,xBrokerAPIOriginatingIdentity,service_id,plan_id) {
-  return new Promise(function(resolve, reject) {
+exports.serviceInstanceGetUsingGET = function (
+  xBrokerAPIVersion,
+  instance_id,
+  xBrokerAPIOriginatingIdentity,
+  service_id,
+  plan_id
+) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
-    examples['application/json'] = {
-  "metadata" : {
-    "attributes" : { },
-    "labels" : null
-  },
-  "maintenance_info" : {
-    "description" : "description",
-    "version" : "version"
-  },
-  "service_id" : "service_id",
-  "dashboard_url" : "dashboard_url",
-  "parameters" : null,
-  "plan_id" : "plan_id"
-};
+    examples["application/json"] = {
+      metadata: {
+        attributes: {},
+        labels: null,
+      },
+      maintenance_info: {
+        description: "description",
+        version: "version",
+      },
+      service_id: "service_id",
+      dashboard_url: "dashboard_url",
+      parameters: null,
+      plan_id: "plan_id",
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-}
-
+};
 
 /**
  * get the last requested operation state for service instance
@@ -71,23 +81,28 @@ exports.serviceInstanceGetUsingGET = function(xBrokerAPIVersion,instance_id,xBro
  * operation String a provided identifier for the operation (optional)
  * returns LastOperationResource
  **/
-exports.serviceInstanceLastOperationGetUsingGET = function(xBrokerAPIVersion,instance_id,service_id,plan_id,operation) {
-  return new Promise(function(resolve, reject) {
+exports.serviceInstanceLastOperationGetUsingGET = function (
+  xBrokerAPIVersion,
+  instance_id,
+  service_id,
+  plan_id,
+  operation
+) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
-    examples['application/json'] = {
-  "instance_usable" : false,
-  "update_repeatable" : false,
-  "description" : "description",
-  "state" : "failed"
-};
+    examples["application/json"] = {
+      instance_usable: false,
+      update_repeatable: false,
+      description: "description",
+      state: "failed",
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-}
-
+};
 
 /**
  * provision a service instance
@@ -99,24 +114,29 @@ exports.serviceInstanceLastOperationGetUsingGET = function(xBrokerAPIVersion,ins
  * xBrokerAPIOriginatingIdentity String identity of the user that initiated the request from the Platform (optional)
  * returns ServiceInstanceProvisionResponse
  **/
-exports.serviceInstanceProvisionUsingPUT = function(body,accepts_incomplete,instance_id,xBrokerAPIVersion,xBrokerAPIOriginatingIdentity) {
-  return new Promise(function(resolve, reject) {
+exports.serviceInstanceProvisionUsingPUT = function (
+  body,
+  accepts_incomplete,
+  instance_id,
+  xBrokerAPIVersion,
+  xBrokerAPIOriginatingIdentity
+) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
-    examples['application/json'] = {
-  "metadata" : {
-    "attributes" : { },
-    "labels" : null
-  },
-  "dashboard_url" : "dashboard_url"
-};
+    examples["application/json"] = {
+      metadata: {
+        attributes: {},
+        labels: null,
+      },
+      dashboard_url: "dashboard_url",
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-}
-
+};
 
 /**
  * update a service instance
@@ -128,15 +148,20 @@ exports.serviceInstanceProvisionUsingPUT = function(body,accepts_incomplete,inst
  * xBrokerAPIOriginatingIdentity String identity of the user that initiated the request from the Platform (optional)
  * returns Object
  **/
-exports.serviceInstanceUpdateUsingPATCH = function(body,accepts_incomplete,instance_id,xBrokerAPIVersion,xBrokerAPIOriginatingIdentity) {
-  return new Promise(function(resolve, reject) {
+exports.serviceInstanceUpdateUsingPATCH = function (
+  body,
+  accepts_incomplete,
+  instance_id,
+  xBrokerAPIVersion,
+  xBrokerAPIOriginatingIdentity
+) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
-    examples['application/json'] = { };
+    examples["application/json"] = {};
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-}
-
+};
